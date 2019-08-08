@@ -1,0 +1,9 @@
+on: push
+name: push
+jobs:
+  push-wincompile:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: push-wincompile
+      uses: ./.github/docker/wincompile
