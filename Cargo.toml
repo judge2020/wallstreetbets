@@ -1,0 +1,12 @@
+[package]
+name = "wallstreetbets"
+version = "0.1.0"
+authors = ["Hunter <8601934+judge2020@users.noreply.github.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+file = "1.1.*"
+lazy_concat = "0.1.*"
+winreg = "0.6.*"
