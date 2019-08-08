@@ -1,6 +1,9 @@
 workflow "push" {
   on = "push"
-  resolves = ["push-linux compile", "./.github/docker/wincompile"]
+  resolves = [
+    "push-linux compile",
+    "push-wincompile",
+  ]
 }
 
 action "push-linux compile" {
@@ -9,6 +12,20 @@ action "push-linux compile" {
   args = "build"
 }
 
-action "./.github/docker/wincompile" {
+action "push-wincompile" {
   uses = "./.github/docker/wincompile"
+}
+
+workflow "New workflow" {
+  on = "push"
+  resolves = ["release-wincompile", "release-Filter published"]
+}
+
+action "release-wincompile" {
+  uses = "./.github/docker/wincompile"
+  args = "--release "
+}
+
+action "release-Filter published" {
+  uses = "actions/bin/filter@master"
 }
