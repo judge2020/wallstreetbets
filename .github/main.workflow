@@ -1,31 +1,35 @@
 workflow "push" {
   on = "push"
   resolves = [
-    "push-linux compile",
     "push-wincompile",
   ]
-}
-
-action "push-linux compile" {
-  uses = "docker://rustlang/rust:nightly"
-  runs = "cargo"
-  args = "build"
 }
 
 action "push-wincompile" {
   uses = "./.github/docker/wincompile"
 }
 
-workflow "New workflow" {
-  on = "push"
-  resolves = ["release-wincompile", "release-Filter published"]
+workflow "release" {
+  resolves = [
+    "release-Filter published",
+    "release-publish",
+  ]
+  on = "release"
 }
 
 action "release-wincompile" {
   uses = "./.github/docker/wincompile"
-  args = "--release "
+  args = "--release --out-dir out -Z unstable-options"
 }
 
 action "release-Filter published" {
   uses = "actions/bin/filter@master"
+  args = "action published"
+}
+
+action "release-publish" {
+  uses = "judge2020/github-action-publish-binaries@master"
+  needs = ["release-wincompile"]
+  args = "out/*"
+  secrets = ["GITHUB_TOKEN"]
 }
