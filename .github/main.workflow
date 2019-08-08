@@ -1,6 +1,6 @@
 workflow "push" {
   on = "push"
-  resolves = ["push-linux compile", "\t./.github/docker/wincompile"]
+  resolves = ["push-linux compile", "./.github/docker/wincompile"]
 }
 
 action "push-linux compile" {
