@@ -9,6 +9,6 @@ action "push-linux compile" {
   args = "build"
 }
 
-action "\t./.github/docker/wincompile" {
-  uses = "\t./.github/docker/wincompile"
+action "./.github/docker/wincompile" {
+  uses = "./.github/docker/wincompile"
 }
