@@ -7,3 +7,9 @@ jobs:
     - uses: actions/checkout@master
     - name: push-wincompile
       uses: ./.github/docker/wincompile
+      with:
+        args: --release --out-dir out -Z unstable-options
+    - uses: actions/upload-artifact@master
+      with:
+        name: release
+        path: out
