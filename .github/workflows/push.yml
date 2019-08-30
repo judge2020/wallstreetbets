@@ -7,3 +7,5 @@ jobs:
     - uses: actions/checkout@master
     - name: push-wincompile
       uses: ./.github/docker/wincompile
+      env:
+        CARGO_CFG_TARGET_FEATURE: crt-static
